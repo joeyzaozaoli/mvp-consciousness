@@ -1,5 +1,6 @@
 var http = require('http');
 var fs = require('fs');
+var queryString = require('query-string');
 
 var headers = {};
 
@@ -14,6 +15,17 @@ var servePage = function(pagePath, response) {
   });
 };
 
+var gatherData = function(request, cb) {
+  var dataStream = '';
+  request.on('data', function(chunk) {
+    dataStream += chunk.toString();
+  });
+  request.on('end', function() {
+    var dataObj = queryString.parse(dataStream);
+    cb(dataObj);
+  });
+};
+
 var requestHandler = function(request, response) {
   console.log(`Serving request method: ${request.method} & request url: ${request.url}`);
 
@@ -23,6 +35,16 @@ var requestHandler = function(request, response) {
 
     } else if (request.url === '/home') {
       servePage(__dirname + '/home.html', response);
+    }
+  }
+
+  if (request.method === 'POST') {
+    if (request.url === '/home') {
+      gatherData(request, function(dataObj) {
+        // save dataObj
+        response.writeHead(302, {Location: '/home'});
+        response.end();
+      });
     }
   }
 };
