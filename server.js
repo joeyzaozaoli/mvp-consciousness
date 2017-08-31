@@ -1,7 +1,11 @@
-var http = require('http');
+var express = require('express');
+var bodyParser = require('body-parser');
 
-var requestHandler = require('./requestHandler');
+var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-var server = http.createServer(requestHandler);
-server.listen(3000, 'localhost');
-console.log('Listening on http://localhost:3000');
+app.listen(3000, function() {
+  console.log('Listening on http://localhost:3000');
+});
+
