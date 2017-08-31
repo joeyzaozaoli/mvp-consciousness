@@ -1,7 +1,7 @@
 var express = require('express');
 var parser = require('body-parser');
 
-var db = require('./db');
+var database = require('./db');
 var handler = require('./requestHandler');
 
 var app = express();

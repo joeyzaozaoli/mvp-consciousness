@@ -6,11 +6,11 @@ var ORM = new Sequelize('consciousness', 'root', '', {
 });
 
 var Journal = ORM.define('journals', {
-  I: {type: Sequelize.TEXT, allowNull: false},
-  II: {type: Sequelize.TEXT, allowNull: false},
-  III: {type: Sequelize.TEXT, allowNull: false},
-  IV: {type: Sequelize.TEXT, allowNull: false},
-  V: {type: Sequelize.TEXT, allowNull: false},
+  I: {type: Sequelize.TEXT, validate: {notEmpty: true}},
+  II: {type: Sequelize.TEXT, validate: {notEmpty: true}},
+  III: {type: Sequelize.TEXT, validate: {notEmpty: true}},
+  IV: {type: Sequelize.TEXT, validate: {notEmpty: true}},
+  V: {type: Sequelize.TEXT, validate: {notEmpty: true}},
   VI: Sequelize.TEXT,
   VII: Sequelize.TEXT,
   VIII: Sequelize.TEXT,
@@ -21,3 +21,5 @@ var Journal = ORM.define('journals', {
 });
 
 Journal.sync();
+
+module.exports = {Journal: Journal};
