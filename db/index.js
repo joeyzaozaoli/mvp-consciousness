@@ -20,6 +20,14 @@ var Journal = ORM.define('journals', {
   XII: Sequelize.TEXT
 });
 
-Journal.sync();
+var Quote = ORM.define('quotes', {
+  quote: {type: Sequelize.TEXT, validate: {notEmpty: true}},
+  author: {type: Sequelize.STRING, validate: {notEmpty: true}},
+  createdAt: Sequelize.DATE,
+  updatedAt: Sequelize.DATE
+});
 
-module.exports = {Journal: Journal};
+Journal.sync();
+Quote.sync();
+
+module.exports = {Journal: Journal, Quote: Quote};
