@@ -5,7 +5,7 @@
   </head>
 
   <body>
-    <h1>Home Page</h1>
+    <h3>Awakening to Your Life's Purpose</h3>
     <form method='POST'>
       <table>
         <thead>
@@ -16,7 +16,7 @@
         <tbody class='journal'>
         </tbody>
       </table>
-      <input type='submit' value='Save'>
+      <input type='submit' value='Pencil Down for Today!'>
     </form>
   </body>
 
@@ -33,7 +33,7 @@
       };
 
       var journalNode = document.getElementsByClassName('journal')[0];
-      var nums = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+      var nums = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
       journalNode.textContent = '';
       nums.forEach(function(num) {
         var templateNode = createEntryNode(num);
