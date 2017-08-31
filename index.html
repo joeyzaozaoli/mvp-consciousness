@@ -13,14 +13,33 @@
             <th colspan='2'>Gratitude Journal</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>II</td>
-            <td><input type='text' name='II' size='100'></td>
-          </tr>
+        <tbody class='journal'>
         </tbody>
       </table>
       <input type='submit' value='Save'>
     </form>
   </body>
+
+  <script>
+    window.onload = function() {
+
+      var createEntryNode = function(num) {
+        var templateNode = document.createElement('tr');
+        var templateStr = `
+            <td>${num}.</td>
+            <td><input type='text' name='${num}' size='100'></td>`;
+        templateNode.innerHTML = templateStr;
+        return templateNode;
+      };
+
+      var journalNode = document.getElementsByClassName('journal')[0];
+      var nums = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+      journalNode.textContent = '';
+      nums.forEach(function(num) {
+        var templateNode = createEntryNode(num);
+        journalNode.appendChild(templateNode);
+      });
+
+    };
+  </script>
 </html>
