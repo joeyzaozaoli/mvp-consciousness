@@ -1,60 +1,35 @@
 window.onload = function() {
 
+  // Randomly generate a quote
+
+  generateQuote();
+  setInterval(generateQuote, 45000);
+
+  // Dynamically create a goals table
+
+  var goalsNode = document.getElementsByClassName('goals')[0];
+  var arabicNums = [1, 2, 3, 4, 5, 6];
+  goalsNode.textContent = '';
+  arabicNums.forEach(function(num) {
+    var templateNode = createGoalNode(num);
+    goalsNode.appendChild(templateNode);
+  });
+
   // Dynamically create a journal table
 
-  var createEntryNode = function(num) {
-    var templateNode = document.createElement('tr');
-    var templateStr = `
-        <td>${num}.</td>
-        <td><input type='text' id='${num}' name='${num}' size='100'></td>`;
-    templateNode.innerHTML = templateStr;
-    return templateNode;
-  };
-
   var journalNode = document.getElementsByClassName('journal')[0];
-  var nums = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+  var romanNums = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   journalNode.textContent = '';
-  nums.forEach(function(num) {
-    var templateNode = createEntryNode(num);
+  romanNums.forEach(function(num) {
+    var templateNode = createJournalNode(num);
     journalNode.appendChild(templateNode);
   });
 
   // Persist form data after form is submitted
 
-  var formNode = document.getElementsByClassName('form')[0];
-  formNode.addEventListener('submit', function() {
-    nums.forEach(function(num) {
-      var inputNode = document.getElementById(num);
-      var inputValue = inputNode.value;
-      localStorage.setItem(num, inputValue);
-    });
-  });
-
-  nums.forEach(function(num) {
-    var inputNode = document.getElementById(num);
-    var inputValue = localStorage.getItem(num);
-    if (inputValue !== null) { inputNode.value = inputValue; }
-  });
-
-  // Randomly generate a quote
-
-  var generateQuote = function() {
-    $.ajax({
-      url: 'http://localhost:3000/quote',
-      type: 'GET',
-      success: function(data) {
-        var quoteNode = document.getElementsByClassName('quote')[0];
-        quoteNode.textContent = `${data.quote}`;
-        var authorNode = document.getElementsByClassName('author')[0];
-        authorNode.textContent = `~ ${data.author}`;
-      },
-      error: function(err) {
-        console.log('Error getting the quote!');
-      }
-    });
-  };
-
-  generateQuote();
-  setInterval(generateQuote, 45000);
+  var goalsFormNode = document.getElementsByClassName('form')[0];
+  var journalFormNode = document.getElementsByClassName('form')[1];
+  persistFormData(goalsFormNode, arabicNums);
+  persistFormData(journalFormNode, romanNums);
 
 };

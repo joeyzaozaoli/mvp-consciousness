@@ -1,0 +1,58 @@
+// Randomly generate a quote
+
+var generateQuote = function() {
+  $.ajax({
+    url: 'http://localhost:3000/quote',
+    type: 'GET',
+    success: function(data) {
+      var quoteNode = document.getElementsByClassName('quote')[0];
+      quoteNode.textContent = `${data.quote}`;
+      var authorNode = document.getElementsByClassName('author')[0];
+      authorNode.textContent = `~ ${data.author}`;
+    },
+    error: function(err) {
+      console.log('Error getting the quote!');
+    }
+  });
+};
+
+// Dynamically create a goals table
+
+var createGoalNode = function(num) {
+  var tempNode = document.createElement('div');
+  var templateStr = `<textarea id='${num}' name='${num}'></textarea>`;
+  tempNode.innerHTML = templateStr;
+  var templateNode = tempNode.childNodes[0];
+  return templateNode;
+};
+
+// Dynamically create a journal table
+
+var createJournalNode = function(num) {
+  var templateNode = document.createElement('tr');
+  var templateStr = `
+      <td>${num}.</td>
+      <td><input type='text' id='${num}' name='${num}'></td>`;
+  templateNode.innerHTML = templateStr;
+  return templateNode;
+};
+
+// Persist form data after form is submitted
+
+var persistFormData = function(formNode, nums) {
+
+  formNode.addEventListener('submit', function() {
+    nums.forEach(function(num) {
+      var inputNode = document.getElementById(num);
+      var inputValue = inputNode.value;
+      localStorage.setItem(num, inputValue);
+    });
+  });
+
+  nums.forEach(function(num) {
+    var inputNode = document.getElementById(num);
+    var inputValue = localStorage.getItem(num);
+    if (inputValue !== null) { inputNode.value = inputValue; }
+  });
+
+};
