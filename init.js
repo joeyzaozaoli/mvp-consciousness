@@ -27,7 +27,9 @@ window.onload = function() {
       type: 'GET',
       success: function(data) {
         var quoteNode = document.getElementsByClassName('quote')[0];
-        quoteNode.textContent = `${data.quote} ~ ${data.author}`;
+        quoteNode.textContent = `${data.quote}`;
+        var authorNode = document.getElementsByClassName('author')[0];
+        authorNode.textContent = `~ ${data.author}`;
       },
       error: function(err) {
         console.log('Error getting the quote!');
@@ -36,6 +38,6 @@ window.onload = function() {
   };
 
   generateQuote();
-  setInterval(generateQuote, 10000);
+  setInterval(generateQuote, 45000);
 
 };
