@@ -1,16 +1,5 @@
 var db = require('./db');
 
-var saveJournal = function(req, res) {
-  var journal = req.body;
-  db.Journal.create(journal)
-    .then(function(data) {
-      res.redirect('/');
-    })
-    .catch(function(err) {
-      res.send('Please think of at least 5 things to be grateful for!');
-    });
-};
-
 var generateQuote = function(req, res) {
   db.Quote.count()
     .then(function(count) {
@@ -22,4 +11,26 @@ var generateQuote = function(req, res) {
     });
 };
 
-module.exports = {saveJournal: saveJournal, generateQuote: generateQuote};
+var saveToTable = function(table, formData, res) {
+  table.create(formData)
+    .then(function(data) {
+      res.redirect('/');
+    })
+    .catch(function(err) {
+      if (table === db.Journal) {
+        res.send('Please think of at least 5 things to be grateful for!');
+      }
+    });
+};
+
+var saveFormData = function(req, res) {
+  var formData = req.body;
+
+  if ('1' in formData) {
+    saveToTable(db.Goal, formData, res);
+  } else if ('I' in formData) {
+    saveToTable(db.Journal, formData, res);
+  }
+};
+
+module.exports = {generateQuote: generateQuote, saveFormData: saveFormData};
