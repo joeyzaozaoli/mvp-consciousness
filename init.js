@@ -6,7 +6,7 @@ window.onload = function() {
     var templateNode = document.createElement('tr');
     var templateStr = `
         <td>${num}.</td>
-        <td><input type='text' name='${num}' size='100'></td>`;
+        <td><input type='text' id='${num}' name='${num}' size='100'></td>`;
     templateNode.innerHTML = templateStr;
     return templateNode;
   };
@@ -17,6 +17,23 @@ window.onload = function() {
   nums.forEach(function(num) {
     var templateNode = createEntryNode(num);
     journalNode.appendChild(templateNode);
+  });
+
+  // Persist form data after form is submitted
+
+  var formNode = document.getElementsByClassName('form')[0];
+  formNode.addEventListener('submit', function() {
+    nums.forEach(function(num) {
+      var inputNode = document.getElementById(num);
+      var inputValue = inputNode.value;
+      localStorage.setItem(num, inputValue);
+    });
+  });
+
+  nums.forEach(function(num) {
+    var inputNode = document.getElementById(num);
+    var inputValue = localStorage.getItem(num);
+    if (inputValue !== null) { inputNode.value = inputValue; }
   });
 
   // Randomly generate a quote
