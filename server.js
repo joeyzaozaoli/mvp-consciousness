@@ -19,6 +19,10 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/archive', function(req, res) {
+  res.render('archive');
+});
+
 app.get('/quote', handler.generateQuote);
 
 app.post('/', handler.saveFormData);
