@@ -20,12 +20,15 @@ app.get('/', function(req, res) {
 });
 
 app.get('/archive', function(req, res) {
-  res.render('archive');
+  handler.retrieveArchivedJournal(function(journalStr) {
+    res.render('archive', {journals: journalStr});
+  });
 });
 
-app.get('/quote', handler.generateQuote);
-
 app.post('/', handler.saveFormData);
+
+// API
+app.get('/quote', handler.generateQuote);
 
 app.listen(3000, function() {
   console.log('Listening on http://localhost:3000');

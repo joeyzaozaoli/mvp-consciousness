@@ -33,4 +33,12 @@ var saveFormData = function(req, res) {
   }
 };
 
-module.exports = {generateQuote: generateQuote, saveFormData: saveFormData};
+var retrieveArchivedJournal = function(cb) {
+  db.Journal.findAll()
+    .then(function(journals) {
+      var journalStr = JSON.stringify(journals);
+      cb(journalStr);
+    });
+};
+
+module.exports = {generateQuote: generateQuote, saveFormData: saveFormData, retrieveArchivedJournal: retrieveArchivedJournal};
