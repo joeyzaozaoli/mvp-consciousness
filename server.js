@@ -1,15 +1,26 @@
 var express = require('express');
-var parser = require('body-parser');
+var bodyParser = require('body-parser');
+var layouts = require('express-ejs-layouts');
 
 var database = require('./db');
 var handler = require('./requestHandler');
 
 var app = express();
-app.use(express.static(__dirname));
-app.use(parser.json());
-app.use(parser.urlencoded({extended: true}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(express.static(__dirname + '/assets'));
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+app.use(layouts);
+
+app.get('/', function(req, res) {
+  res.render('index');
+});
 
 app.get('/quote', handler.generateQuote);
+
 app.post('/', handler.saveFormData);
 
 app.listen(3000, function() {
