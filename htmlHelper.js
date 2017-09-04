@@ -1,13 +1,11 @@
 // Randomly generate a quote
 
-var generateQuote = function() {
+var generateQuote = function(quoteNode, authorNode) {
   $.ajax({
     url: 'http://localhost:3000/quote',
     type: 'GET',
     success: function(data) {
-      var quoteNode = document.getElementsByClassName('quote')[0];
       quoteNode.textContent = `${data.quote}`;
-      var authorNode = document.getElementsByClassName('author')[0];
       authorNode.textContent = `~ ${data.author}`;
     },
     error: function(err) {

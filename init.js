@@ -2,8 +2,12 @@ window.onload = function() {
 
   // Randomly generate a quote
 
-  generateQuote();
-  setInterval(generateQuote, 45000);
+  var quoteNode = document.getElementsByClassName('quote')[0];
+  var authorNode = document.getElementsByClassName('author')[0];
+  generateQuote(quoteNode, authorNode);
+  setInterval(function() {
+    generateQuote(quoteNode, authorNode);
+  }, 45000);
 
   // Dynamically create a goals table
 
