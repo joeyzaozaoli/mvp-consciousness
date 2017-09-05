@@ -40,4 +40,8 @@ Quote.sync();
 Goal.sync();
 Journal.sync();
 
-module.exports = {Quote: Quote, Goal: Goal, Journal: Journal};
+module.exports = {
+  Quote: Quote,
+  Goal: Goal,
+  Journal: Journal
+};

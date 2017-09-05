@@ -41,4 +41,8 @@ var retrieveArchivedJournal = function(cb) {
     });
 };
 
-module.exports = {generateQuote: generateQuote, saveFormData: saveFormData, retrieveArchivedJournal: retrieveArchivedJournal};
+module.exports = {
+  generateQuote: generateQuote,
+  saveFormData: saveFormData,
+  retrieveArchivedJournal: retrieveArchivedJournal
+};

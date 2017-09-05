@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var layouts = require('express-ejs-layouts');
 
-var database = require('./db');
 var handler = require('./requestHandler');
 
 var app = express();
