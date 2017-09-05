@@ -36,8 +36,7 @@ var saveFormData = function(req, res) {
 var retrieveArchivedJournal = function(cb) {
   db.Journal.findAll()
     .then(function(journals) {
-      var journalStr = JSON.stringify(journals);
-      cb(journalStr);
+      cb(journals);
     });
 };
 

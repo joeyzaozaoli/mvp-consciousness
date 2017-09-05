@@ -19,8 +19,8 @@ app.get('/', function(req, res) {
 });
 
 app.get('/archive', function(req, res) {
-  handler.retrieveArchivedJournal(function(journalStr) {
-    res.render('archive', {journals: journalStr});
+  handler.retrieveArchivedJournal(function(journals) {
+    res.render('archive', {journals: journals});
   });
 });
 
