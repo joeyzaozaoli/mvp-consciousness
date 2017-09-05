@@ -24,10 +24,14 @@ app.get('/archive', function(req, res) {
   });
 });
 
-app.post('/', handler.saveFormData);
-
 // API
 app.get('/quote', handler.generateQuote);
+
+app.get('/*', function(req, res) {
+  res.sendStatus(404);
+});
+
+app.post('/', handler.saveFormData);
 
 app.listen(3000, function() {
   console.log('Listening on http://localhost:3000');
