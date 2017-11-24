@@ -9,7 +9,7 @@ var getRandomQuote = function(quoteNode, authorNode) {
       authorNode.textContent = `~ ${data.author}`;
     },
     error: function(err) {
-      console.log('Error getting the quote!');
+      console.log('get failure');
     }
   });
 };

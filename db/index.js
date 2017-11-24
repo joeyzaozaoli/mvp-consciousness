@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-var ORM = new Sequelize('consciousness', 'root', '', {
+var ORM = new Sequelize('solunar', 'root', '', {
   host: 'localhost',
   dialect: 'mysql'
 });
