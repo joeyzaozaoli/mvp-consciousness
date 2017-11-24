@@ -1,6 +1,6 @@
 var db = require('./db');
 
-var generateQuote = function(req, res) {
+module.exports.getRandomQuote = function(req, res) {
   db.Quote.count()
     .then(function(count) {
       var id = Math.floor(count * Math.random()) + 1;
@@ -23,7 +23,7 @@ var saveToTable = function(table, formData, res) {
     });
 };
 
-var saveFormData = function(req, res) {
+module.exports.saveFormData = function(req, res) {
   var formData = req.body;
 
   if ('1' in formData) {
@@ -33,15 +33,10 @@ var saveFormData = function(req, res) {
   }
 };
 
-var retrieveArchivedJournal = function(cb) {
+module.exports.retrieveArchivedJournal = function(cb) {
   db.Journal.findAll()
     .then(function(journals) {
       cb(journals);
     });
 };
 
-module.exports = {
-  generateQuote: generateQuote,
-  saveFormData: saveFormData,
-  retrieveArchivedJournal: retrieveArchivedJournal
-};

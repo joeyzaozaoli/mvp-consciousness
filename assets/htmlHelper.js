@@ -1,8 +1,8 @@
 // Randomly generate a quote
 
-var generateQuote = function(quoteNode, authorNode) {
+var getRandomQuote = function(quoteNode, authorNode) {
   $.ajax({
-    url: 'http://localhost:3000/quote',
+    url: '/api/quote',
     type: 'GET',
     success: function(data) {
       quoteNode.textContent = `${data.quote}`;

@@ -4,9 +4,9 @@ window.onload = function() {
 
   var quoteNode = document.getElementsByClassName('quote')[0];
   var authorNode = document.getElementsByClassName('author')[0];
-  generateQuote(quoteNode, authorNode);
+  getRandomQuote(quoteNode, authorNode);
   setInterval(function() {
-    generateQuote(quoteNode, authorNode);
+    getRandomQuote(quoteNode, authorNode);
   }, 45000);
 
   // Dynamically create a goals table
